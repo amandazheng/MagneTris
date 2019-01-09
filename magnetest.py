@@ -43,8 +43,12 @@ while run:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
                 x_change = -5
+                if x < 10:
+                    x = 10
             elif event.key == pygame.K_RIGHT:
                 x_change = 5
+                if x > 750:
+                    x = 750
             x += x_change
 
         #player.clamp_ip(screen_rect)
