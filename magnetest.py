@@ -1,10 +1,10 @@
 import pygame
 import os
+import random
+a_random = random.randint(10,750)
 _image_library = {}
 pygame.init()
 gameDisplay = pygame.display.set_mode((800,600))
-screen_rect=gameDisplay.get_rect()
-player=pygame.Rect(180, 180, 20, 20)
 black = (0,0,0)
 white = (255,255,255)
 clock = pygame.time.Clock()
@@ -19,11 +19,16 @@ counter, text = 100, '100'.rjust(3)
 pygame.time.set_timer(pygame.USEREVENT, 1000)
 font = pygame.font.SysFont('Helvetica', 30)
 
+def fallingMagnet(a,b):
+    gameDisplay.blit(magnet, (a,b))
+a = a_random
+b = 0
 
 
 while run:
     gameDisplay.fill(white)
     NSMagnet(x,y)
+    fallingMagnet(a,b)
     pygame.display.update()
     clock.tick(60)
 
@@ -50,16 +55,6 @@ while run:
                 if x > 750:
                     x = 750
             x += x_change
-
-        #player.clamp_ip(screen_rect)
-        #if NSMagnet.screen_rect.right > 800:
-         #   NSMagnet.screen_rect.right = 800
-        #if NSMagnet.screen_rect.left < 0:
-         #   NSMagnet.screen_rect.left = 0
-        #if NSMagnet.screen_rect.bottom > 600:
-        #    NSMagnet.screen_rect.bottom = 600
-        #if NSMagnet.screen_rect.top < 0:
-         #   NSMagnet.screen_rect.top = 0
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
