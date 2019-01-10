@@ -5,6 +5,8 @@ a_random = random.randint(10,750)
 _image_library = {}
 pygame.init()
 gameDisplay = pygame.display.set_mode((800,600))
+screen_rect=gameDisplay.get_rect()
+player=pygame.Rect(180, 180, 20, 20)
 black = (0,0,0)
 white = (255,255,255)
 clock = pygame.time.Clock()
@@ -24,7 +26,7 @@ def fallingMagnet(a,b):
 a = a_random
 b = 0
 
-
+fall=True
 while run:
     gameDisplay.fill(white)
     NSMagnet(x,y)
@@ -32,8 +34,16 @@ while run:
     pygame.display.update()
     clock.tick(60)
 
+    if b >= x and a >= (x-30) and a <= (x+30):
+        a = x
+        fall = False
+        # pygame.quit()
+        # exit()
+
     for event in pygame.event.get():
         if event.type == pygame.USEREVENT: 
+            if fall == True: 
+                b+=30
             counter -= 1
             text = str(counter).rjust(3) if counter > 0 else "sorry, you lost"
         if event.type == pygame.QUIT: break
@@ -63,5 +73,3 @@ while run:
         
 pygame.quit()
 exit()
-
-
