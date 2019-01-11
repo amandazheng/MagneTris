@@ -2,6 +2,7 @@ import pygame
 import os
 import random
 a_random = random.randint(10,750)
+magnet_random = random.randint(1,2)
 _image_library = {}
 pygame.init()
 gameDisplay = pygame.display.set_mode((800,600))
@@ -11,18 +12,25 @@ black = (0,0,0)
 white = (255,255,255)
 clock = pygame.time.Clock()
 run = True
-magnet = pygame.image.load("NSMagnet.png")
+magnetNS = pygame.image.load("NSMagnet.png")
 
 def NSMagnet(x,y):
-    gameDisplay.blit(magnet, (x,y))
+    gameDisplay.blit(magnetNS, (x,y))
 x = 360
 y = 400
 counter, text = 100, '100'.rjust(3)
 pygame.time.set_timer(pygame.USEREVENT, 1000)
 font = pygame.font.SysFont('Helvetica', 30)
 
+# if magnet_random == 1: 
+#     magnet_current == magnetNS
+# else: 
+#      magnet_current == mangetSN
+    
+magnet_current = magnetNS
+
 def fallingMagnet(a,b):
-    gameDisplay.blit(magnet, (a,b))
+    gameDisplay.blit(magnet_current, (a,b))
 a = a_random
 b = 0
 
