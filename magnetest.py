@@ -20,7 +20,7 @@ def NSMagnet(x,y):
 x = 360
 y = 400
 counter, text = 100, '100'.rjust(3)
-pygame.time.set_timer(pygame.USEREVENT, 100)
+pygame.time.set_timer(pygame.USEREVENT, 90)
 font = pygame.font.SysFont('Helvetica', 30)
 
 def fallingMagnet(a,b):
