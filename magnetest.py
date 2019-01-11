@@ -2,6 +2,7 @@ import pygame
 import os
 import random
 a_random = random.randint(10,750)
+c_random = random.randint(10,750)
 _image_library = {}
 pygame.init()
 gameDisplay = pygame.display.set_mode((800,600))
@@ -12,6 +13,7 @@ white = (255,255,255)
 clock = pygame.time.Clock()
 run = True
 magnet = pygame.image.load("NSMagnet.png")
+magnetSouth = pygame.image.load("SNMagnet.png")
 
 def NSMagnet(x,y):
     gameDisplay.blit(magnet, (x,y))
@@ -26,20 +28,26 @@ def fallingMagnet(a,b):
 a = a_random
 b = 0
 
+def fallingMagnetSouth(a,b):
+    gameDisplay.blit(magnetSouth, (c,d))
+c = 50
+d = 0
 fall=True
 while run:
     gameDisplay.fill(white)
     NSMagnet(x,y)
     fallingMagnet(a,b)
+    fallingMagnetSouth(c,d)
     pygame.display.update()
     clock.tick(60)
 
-    if b >= (y-152) and a >= (x-20) and a <= (x+20):
+    if b == (y-102) and a >= (x-20) and a <= (x+20):
         a = x
         fall = False
 
     if fall == True: 
         b += 1
+    
 
     # this part was my attempt for multiple falling magnets, it didnt work 
     # if counter % 10 == 0:
@@ -52,7 +60,6 @@ while run:
         if event.type == pygame.QUIT: break
         
     else:
-        # gameDisplay.fill((255, 255, 255))
         gameDisplay.blit(font.render(text, True, (0, 0, 0)), (32, 48))
         pygame.display.flip()
         clock.tick(60)
