@@ -25,7 +25,7 @@ magnet_current = 0
 x = 360
 y = 400
 counter, text = 100, '100'.rjust(3)
-pygame.time.set_timer(pygame.USEREVENT, 100)
+pygame.time.set_timer(pygame.USEREVENT, 1000)
 font = pygame.font.SysFont('Helvetica', 30)
 stackheight = 1
 
@@ -62,7 +62,6 @@ magnetList.append(fallingMagnet(a_random, 0, True))
 magnetList[len(magnetList)-1].drawChar()
 
 while run:
-    pygame.time.delay(10)
     gameDisplay.fill(white)
     NSMagnet(x,y)
 
@@ -111,3 +110,6 @@ while run:
         
 pygame.quit()
 exit()
+
+
+
