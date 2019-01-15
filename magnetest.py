@@ -38,10 +38,9 @@ else:
     magnet_current = magnetSN
     
 class fallingMagnet:
-    def __init__(self, a, b, orientation, fall):
+    def __init__(self, a, b, fall):
         self.a = a
         self.b = b
-        self.orientation = magnet_random
         self.fall = fall
         self.drawChar()
         self.fallConnect()
@@ -59,67 +58,13 @@ class fallingMagnet:
                 self.fall = False
 
 magnetList=[]
-magnetList.append(fallingMagnet(a_random, 0, magnet_random, True))
+magnetList.append(fallingMagnet(a_random, 0, True))
 magnetList[len(magnetList)-1].drawChar()
-
-def fallingMagnetSouth(a,b):
-    gameDisplay.blit(magnetSN, (a,b))
-a = 50
-b = 0
-
-fall=True
 
 while run:
     pygame.time.delay(10)
     gameDisplay.fill(white)
-    NSMagnet(x,y) 
-    magnet1 = fallingMagnet(0,0,magnet_current,True)
-    b = magnet1.b
-    a = magnet1.a
-    if b == (y-stackheight) and a >= (x-20) and a <= (x+20):
-        a = x 
-        magnetStackHeight = magnetStackHeight + 102
-        fall = False
-
-    if fall == True: 
-        b += .5
-    
-
-    # this part was my attempt for multiple falling magnets, it didnt work 
-    #if counter % 10 == 0:
-    #    fallingMagnet(a,b)
-
-    for event in pygame.event.get():
-        if event.type == pygame.USEREVENT: 
-            counter -= .1
-            text = str(counter).rjust(3) if counter > 0 else "sorry, you lost"
-        gameDisplay.blit(font.render(text, True, (0, 0, 0)), (32, 48))
-        pygame.display.flip()
-        if event.type == pygame.QUIT:
-            run = False
-        keys = pygame.key.get_pressed()
-        x_change = 0
-        if keys[pygame.K_LEFT]:
-            x_change = -5
-            if x < 10:
-                x = 10
-        elif keys[pygame.K_RIGHT]:
-            x_change = 5
-            if x > 750:
-                x = 750
-
-        if fall == False:
-                a = x
-
-        if event.type == pygame.KEYUP:
-            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                x_change = 0 
-        x+= x_change
-                ################
-    pygame.display.update()
-#while run:
-#    gameDisplay.fill(white)
-#    NSMagnet(x,y)
+    NSMagnet(x,y)
 
     '''my attempt at falling by time''' 
     # if counter % 5.00 == 0.00:
@@ -130,38 +75,38 @@ while run:
         magnetList[i].drawChar()
         magnetList[i].fallConnect()
         if magnetList[i].fall == False and len(magnetList)-1 == i:
-            magnetList.append(fallingMagnet(a_random, 0, magnet_random, True))
+            magnetList.append(fallingMagnet(a_random, 0, True))
             stackheight += 1
     
-#    for event in pygame.event.get():
-#        if event.type == pygame.USEREVENT: 
-#            counter -= 1
-#            text = str(counter).rjust(3)
-#            if counter < 0:
-##                "sorry, you lost"
+    for event in pygame.event.get():
+        if event.type == pygame.USEREVENT: 
+            counter -= 1
+            text = str(counter).rjust(3)
+            if counter < 0:
+                "sorry, you lost"
         if event.type == pygame.QUIT: break
         
-#    else:
-#        gameDisplay.blit(font.render(text, True, (0, 0, 0)), (32, 48))
-#        pygame.display.flip()
-#        clock.tick(60)
+    else:
+        gameDisplay.blit(font.render(text, True, (0, 0, 0)), (32, 48))
+        pygame.display.flip()
+        clock.tick(60)
 
-#    if event.type == pygame.QUIT:
-#        run = False
-#    if event.type == pygame.KEYDOWN:
-#        if event.key == pygame.K_LEFT:
-#            x_change = -5
- #           if x < 10:
-  #              x = 10
-   #     elif event.key == pygame.K_RIGHT:
-    #        x_change = 5
-     #       if x > 750:
-      #          x = 750
-       # x += x_change
+    if event.type == pygame.QUIT:
+        run = False
+    if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_LEFT:
+            x_change = -5
+            if x < 10:
+                x = 10
+        elif event.key == pygame.K_RIGHT:
+            x_change = 5
+            if x > 750:
+                x = 750
+        x += x_change
 
-#    if event.type == pygame.KEYUP:
-#        if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-#            x_change = 0
+    if event.type == pygame.KEYUP:
+        if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+            x_change = 0
             ################
         
 pygame.quit()
