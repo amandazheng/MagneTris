@@ -11,8 +11,7 @@ import os
 import random
 import time
 
-a_random = random.randint(10,750)
-magnet_random = random.randint(1,2)
+magnet_random = random.randint(0,2)
 _image_library = {}
 pygame.init()
 gameDisplay = pygame.display.set_mode((800,800))
@@ -26,8 +25,8 @@ magnetNS = pygame.image.load("NSMagnet.png")
 magnetSN = pygame.image.load("SNMagnet.png")
 #magnet_current = 0
 x = 360
-y = 515
-counter, text = 10, '100'.rjust(3) #change counter back to 50ish? when done
+y = 516
+counter, text = 10, '10'.rjust(3) #change counter back to 50ish? when done
 pygame.time.set_timer(pygame.USEREVENT, 1000)
 font = pygame.font.SysFont('Helvetica', 30)
 stackheight = 1
@@ -54,24 +53,26 @@ class fallingMagnet:
 
     def reset_pos(self):
         self.b = 0
-        self.a = random.randrange(0, 750)
-        self.orientation = random.randrange(-1,2)
- 
+        self.a = random.randint(10,750)
+        self.orientation = magnet_current
+
+
     def fallConnect (self):
         if self.fall == False: 
             self.a = x
             self.reset_pos
         else: 
-            self.b += 1
+            self.b += 2
             if self.b > 800:
                 self.reset_pos()
+
             if self.b == (y-102*stackheight) and self.a >= (x-20) and self.a <= (x+20):
                 self.a = x
                 self.reset_pos
                 self.fall = False
 
 magnetList=[]
-magnetList.append(fallingMagnet(a_random, 0, magnet_current, True))
+magnetList.append(fallingMagnet(random.randint(10,750), 0, magnet_current, True))
 magnetList[len(magnetList)-1].drawChar()
 
 while run:
@@ -88,7 +89,7 @@ while run:
         magnetList[i].fallConnect()
 
         if magnetList[i].fall == False and len(magnetList)-1 == i:
-            magnetList.append(fallingMagnet(a_random, 0, magnet_current, True))
+            magnetList.append(fallingMagnet(random.randint(10,750), 0, magnet_current, True))
             stackheight += 1
         
     for event in pygame.event.get():
