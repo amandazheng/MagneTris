@@ -1,9 +1,9 @@
 '''To Do Problems'''
-# doesn't randomize position for magnets (done) // randomize magnet orientation
+# randomize magnet orientation
 # fix endgame for when touches top of screen (done, but may want to include some sort of victory message)
-# make it fall by certain amount of time (?)
-#next magnet wont fall unless they connect (done)
-#magnet reset_pos only works after miss
+# make it fall by certain amount of time
+#next magnet wont fall unless they connect 
+#clock
 
 
 import pygame
@@ -11,7 +11,6 @@ import os
 import random
 import time
 
-magnet_random = random.randint(0,2)
 _image_library = {}
 pygame.init()
 gameDisplay = pygame.display.set_mode((800,800))
@@ -20,24 +19,24 @@ black = (0,0,0)
 white = (255,255,255)
 clock = pygame.time.Clock()
 run = True
-magnet = pygame.image.load("NSMagnet.png")
 magnetNS = pygame.image.load("NSMagnet.png")
 magnetSN = pygame.image.load("SNMagnet.png")
-#magnet_current = 0
 x = 360
-y = 516
-counter, text = 10, '10'.rjust(3) #change counter back to 50ish? when done
+y = 514
+counter, text = 10, '10'.rjust(3) #change counter back to 20ish? when done
 pygame.time.set_timer(pygame.USEREVENT, 1000)
 font = pygame.font.SysFont('Helvetica', 30)
 stackheight = 1
 
+# magnet_current = random.randint(0,1)
+# if magnet_current == 1:
+#     magnet_current = magnetSN
+# else:
+#     magnet_current = magnetNS
+
 def NSMagnet(x,y):
     gameDisplay.blit(magnetNS, (x,y))
 
-if magnet_random == 0: 
-    magnet_current = magnetNS
-else: 
-    magnet_current = magnetSN
     
 class fallingMagnet:
     def __init__(self, a, b, orientation, fall):
@@ -48,14 +47,19 @@ class fallingMagnet:
         self.drawChar()
         self.fallConnect()
 
+    
+
     def drawChar (self):
-        gameDisplay.blit(magnet_current, (self.a,self.b))
+        gameDisplay.blit(self.orientation, (self.a,self.b))
 
     def reset_pos(self):
         self.b = 0
         self.a = random.randint(10,750)
-        self.orientation = magnet_current
-
+        
+        if random.randint(0,2) == 1:
+            self.orientation = magnetSN
+        else:
+            self.orientation = magnetNS
 
     def fallConnect (self):
         if self.fall == False: 
@@ -72,7 +76,7 @@ class fallingMagnet:
                 self.fall = False
 
 magnetList=[]
-magnetList.append(fallingMagnet(random.randint(10,750), 0, magnet_current, True))
+magnetList.append(fallingMagnet(random.randint(10,750), 0, magnetNS, True))
 magnetList[len(magnetList)-1].drawChar()
 
 while run:
@@ -89,7 +93,12 @@ while run:
         magnetList[i].fallConnect()
 
         if magnetList[i].fall == False and len(magnetList)-1 == i:
-            magnetList.append(fallingMagnet(random.randint(10,750), 0, magnet_current, True))
+            if random.randint(0,2) == 1:
+                orientation = magnetSN
+            else:
+                orientation = magnetNS
+
+            magnetList.append(fallingMagnet(random.randint(10,750), 0, orientation, True))
             stackheight += 1
         
     for event in pygame.event.get():
