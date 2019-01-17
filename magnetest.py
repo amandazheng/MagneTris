@@ -23,7 +23,7 @@ magnetNS = pygame.image.load("NSMagnet.png")
 magnetSN = pygame.image.load("SNMagnet.png")
 x = 360
 y = 514
-counter, text = 10, '10'.rjust(3) #change counter back to 20ish? when done
+counter, text = 15, '15'.rjust(3) #change counter back to 50ish? when done
 pygame.time.set_timer(pygame.USEREVENT, 1000)
 font = pygame.font.SysFont('Helvetica', 30)
 stackheight = 1
@@ -104,9 +104,9 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.USEREVENT: 
             counter -= 1
-            text = str(counter).rjust(3)
-            if counter < 0:
-                "sorry, you lost"
+            text = str(counter).rjust(3) if counter > 0 else "sorry, you lose"
+            if counter < -1:
+                run = False
             #if counter < -3:
                 #run = False
         if event.type == pygame.QUIT: break
