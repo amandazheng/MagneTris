@@ -133,6 +133,10 @@ while run:
         if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
             x_change = 0
     if stackheight == 5:
+        text = "Congrats! You won!" ##I think this isn't working because the counter freezes
+        gameDisplay.blit(font.render(text, True, (0, 0, 0)), (32, 48))
+
+        pygame.time.delay(1000)
         run = False
             ################
         
